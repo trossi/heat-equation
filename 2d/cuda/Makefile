@@ -24,6 +24,27 @@ LDFLAGS=
 LIBS=-lcudart
 endif
 
+ifeq ($(COMP),gnu_nompi)
+CXX=nvcc
+CC=gcc
+NVCC=nvcc
+NVCCFLAGS=-g -O3 -I$(COMMONDIR) -Ino_mpi
+CCFLAGS=-g -O3 -I$(COMMONDIR) -Ino_mpi
+LDFLAGS=
+LIBS=-lcudart
+endif
+
+ifeq ($(COMP),chipstar_nompi)
+CXX=cucc
+CC=gcc
+NVCC=cucc
+NVCCFLAGS=-g -O3 -I$(COMMONDIR) -Ino_mpi
+CCFLAGS=-g -O3 -Wall -I$(COMMONDIR) -Ino_mpi
+LDFLAGS=
+LIBS=
+endif
+
+
 EXE=heat_cuda
 OBJS=main.o core.o core_cuda.o setup.o utilities.o io.o 
 OBJS_PNG=$(COMMONDIR)/pngwriter.o
